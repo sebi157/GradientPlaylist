@@ -69,7 +69,7 @@
                     return response.json();
                 })
                 .then(data => {
-                    console.log('Playlist Tracks:', data.items);
+                    console.log('Playlist Data:', data);
                     const playlistSongsDiv = document.getElementById('playlistSongs');
                     playlistSongsDiv.innerHTML = '';
                     data.items.forEach(song => {

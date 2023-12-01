@@ -1,0 +1,40 @@
+body {
+    margin: 0;
+    height: 100%;
+    background-image: linear-gradient(to bottom right,#1db954,#00a573,#008f84,#007784);
+}
+
+.card {
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+}
+
+.card-title {
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+/* Centering the card vertically and horizontally */
+.vh-100 {
+    height: 100vh;
+}
+
+.invisible {
+    display: none;
+}
+
+.visible {
+    display: block;
+    border: 1px solid #1db954;
+    height: 200px;
+    overflow-y: auto;
+    margin-top: 1rem;
+}
+
+.visible p{
+    text-transform: uppercase;
+}

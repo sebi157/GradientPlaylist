@@ -71,8 +71,19 @@
                     const playlistSongsDiv = document.getElementById('playlistSongs');
                     playlistSongsDiv.innerHTML = '';
                     data.items.forEach(song => {
-                        const songElement = document.createElement('p');
-                        songElement.textContent = `${song.track.name} - ${song.track.artists[0].name}`;
+                        const songElement = document.createElement('div');
+                        songElement.classList.add('song-item');
+
+                        const songInfo = document.createElement('p');
+                        songInfo.textContent = `${song.track.name} - ${song.track.artists[0].name}`;
+                        songElement.appendChild(songInfo);
+                        
+                        const coverImage = document.createElement('img');
+                        coverImage.src = song.track.album.images[2].url; // Use the URL of the first (largest) image
+                        coverImage.alt = `${song.track.album.name} cover`;
+                        coverImage.classList.add('cover-image');
+                        songElement.appendChild(coverImage);
+                        
                         playlistSongsDiv.appendChild(songElement);
                     });
 

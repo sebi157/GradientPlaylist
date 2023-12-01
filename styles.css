@@ -29,7 +29,6 @@ body {
 
 .visible {
     display: block;
-    border: 1px solid #1db954;
     height: 200px;
     overflow-y: auto;
     margin-top: 1rem;
@@ -37,4 +36,8 @@ body {
 
 .visible p{
     text-transform: uppercase;
+}
+
+.visible .song-item {
+    border: 1px solid #1db954;
 }

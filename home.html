@@ -50,27 +50,26 @@
                 return pathnameParts[playlistIndex + 1];
             }
 
-            function fetchSongs(playlistLink, accessToken){
-                //console.log(accessToken);
+            async function fetchAllSongs(playlistLink, accessToken) {
                 const playlistID = getPlaylistID(playlistLink);
+                let nextUrl = `https://api.spotify.com/v1/playlists/${playlistID}/tracks`;
 
-                const apiUrl = `https://api.spotify.com/v1/playlists/${playlistID}/tracks`;
-                //console.log(apiUrl, accessToken);
-                fetch(apiUrl, {
-                    headers: {
-                        'Authorization': `Bearer ${accessToken}`
-                    }
-                })
-                .then(response => {
+                const playlistSongsDiv = document.getElementById('playlistSongs');
+                playlistSongsDiv.innerHTML = '';
+
+                while (nextUrl) {
+                    const response = await fetch(nextUrl, {
+                        headers: {
+                            'Authorization': `Bearer ${accessToken}`
+                        }
+                    });
+
                     if (!response.ok) {
                         throw new Error('Network response was not ok');
                     }
-                    return response.json();
-                })
-                .then(data => {
-                    console.log('Playlist Data:', data);
-                    const playlistSongsDiv = document.getElementById('playlistSongs');
-                    playlistSongsDiv.innerHTML = '';
+
+                    const data = await response.json();
+
                     data.items.forEach(song => {
                         const songElement = document.createElement('div');
                         songElement.classList.add('song-item');
@@ -87,14 +86,12 @@
 
                         playlistSongsDiv.appendChild(songElement);
                     });
-                    console.log(data.next);
 
-                    playlistSongsDiv.classList.remove('invisible');
-                    playlistSongsDiv.classList.add('visible');
-                })
-                .catch(error => {
-                    console.error('There was a problem fetching the playlist:', error);
-                });
+                    nextUrl = data.next;
+                }
+
+                playlistSongsDiv.classList.remove('invisible');
+                playlistSongsDiv.classList.add('visible');
             }
             document.getElementById('spotifyForm').addEventListener('submit', function (event) {
                 event.preventDefault();

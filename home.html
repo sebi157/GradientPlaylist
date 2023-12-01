@@ -96,23 +96,6 @@
                     console.error('There was a problem fetching the playlist:', error);
                 });
             }
-
-            function fetchPlaylist(playlistLink, accessToken) {
-                const playlistSongsDiv = document.getElementById('playlistSongs');
-
-                data = fetchSongs(playlistLink, accessToken);
-                console.log(data);
-                
-                playlistSongsDiv.innerHTML = '';
-                data.forEach(song => {
-                    const songElement = document.createElement('p');
-                    songElement.textContent = `${song.name} - ${song.artist}`;
-                    playlistSongsDiv.appendChild(songElement);
-                });
-
-                playlistSongsDiv.classList.remove('invisible');
-                playlistSongsDiv.classList.add('visible');
-            }
             document.getElementById('spotifyForm').addEventListener('submit', function (event) {
                 event.preventDefault();
                 const playlistLink = document.getElementById('playlistLink').value;

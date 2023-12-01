@@ -54,7 +54,7 @@
                 //console.log(accessToken);
                 const playlistID = getPlaylistID(playlistLink);
 
-                const apiUrl = `https://api.spotify.com/v1/playlists/${playlistID}/tracks`;
+                const apiUrl = `https://api.spotify.com/v1/playlists/${playlistID}/tracks?limit=5000`;
                 //console.log(apiUrl, accessToken);
                 fetch(apiUrl, {
                     headers: {
@@ -117,7 +117,7 @@
                 event.preventDefault();
                 const playlistLink = document.getElementById('playlistLink').value;
                 const accessToken = getAccessTokenFromURL();
-                console.log(accessToken);
+                //console.log(accessToken);
                 fetchSongs(playlistLink, accessToken);
             });
         </script>

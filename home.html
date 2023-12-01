@@ -56,46 +56,48 @@
 
                 const apiUrl = `https://api.spotify.com/v1/playlists/${playlistID}/tracks`;
 
+                while(data.next){
                 //console.log(apiUrl, accessToken);
-                fetch(apiUrl, {
-                    headers: {
-                        'Authorization': `Bearer ${accessToken}`
-                    }
-                })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    console.log('Playlist Data:', data);
-                    const playlistSongsDiv = document.getElementById('playlistSongs');
-                    playlistSongsDiv.innerHTML = '';
-                    data.items.forEach(song => {
-                        const songElement = document.createElement('div');
-                        songElement.classList.add('song-item');
+                    fetch(apiUrl, {
+                        headers: {
+                            'Authorization': `Bearer ${accessToken}`
+                        }
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error('Network response was not ok');
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        console.log('Playlist Data:', data);
+                        const playlistSongsDiv = document.getElementById('playlistSongs');
+                        playlistSongsDiv.innerHTML = '';
+                        data.items.forEach(song => {
+                            const songElement = document.createElement('div');
+                            songElement.classList.add('song-item');
 
-                        const songInfo = document.createElement('p');
-                        songInfo.textContent = `${song.track.name} - ${song.track.artists[0].name}`;
-                        songElement.appendChild(songInfo);
-                        
-                        const coverImage = document.createElement('img');
-                        coverImage.src = song.track.album.images[2].url; // Use the URL of the first (largest) image
-                        coverImage.alt = `${song.track.album.name} cover`;
-                        coverImage.classList.add('cover-image');
-                        songElement.appendChild(coverImage);
+                            const songInfo = document.createElement('p');
+                            songInfo.textContent = `${song.track.name} - ${song.track.artists[0].name}`;
+                            songElement.appendChild(songInfo);
+                            
+                            const coverImage = document.createElement('img');
+                            coverImage.src = song.track.album.images[2].url; // Use the URL of the first (largest) image
+                            coverImage.alt = `${song.track.album.name} cover`;
+                            coverImage.classList.add('cover-image');
+                            songElement.appendChild(coverImage);
 
-                        playlistSongsDiv.appendChild(songElement);
+                            playlistSongsDiv.appendChild(songElement);
+                        });
+                        console.log(data.next);
+                        apiUrl = data.next;
+                        playlistSongsDiv.classList.remove('invisible');
+                        playlistSongsDiv.classList.add('visible');
+                    })
+                    .catch(error => {
+                        console.error('There was a problem fetching the playlist:', error);
                     });
-                    console.log(data.next);
-
-                    playlistSongsDiv.classList.remove('invisible');
-                    playlistSongsDiv.classList.add('visible');
-                })
-                .catch(error => {
-                    console.error('There was a problem fetching the playlist:', error);
-                });
+                }
             }
 
             function fetchPlaylist(playlistLink, accessToken) {

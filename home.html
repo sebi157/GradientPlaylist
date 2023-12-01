@@ -57,7 +57,7 @@
                 //console.log(apiUrl, accessToken);
                 fetch(apiUrl, {
                     headers: {
-                        'Authorization': `Bearer BQDchhm5XIDVIYhy7yEJ8lwl3MS42jVaW8YsO3s1BT6tnU8BHvhoa86UO_oXWAT5AdaNLV2K1_PWWqUMYWsjTk_44qvBowATxfmKZVBAvB0wONCmaEI`
+                        'Authorization': `Bearer BQA5D3Kvgk1c4RhJ2eGzDUG7jIc3s6Pspsxg1wisdU5n5oGB75zp07GSCpAjysLtc2f7aQV9Qi77QmXfsMyLh5GDfswOYDEOY9Xp-oqhuBJAkIOH3KI`
                     }
                 })
                 .then(response => {
@@ -83,7 +83,7 @@
                         coverImage.alt = `${song.track.album.name} cover`;
                         coverImage.classList.add('cover-image');
                         songElement.appendChild(coverImage);
-                        
+
                         playlistSongsDiv.appendChild(songElement);
                     });
 

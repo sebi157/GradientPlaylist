@@ -50,7 +50,7 @@
                 return pathnameParts[playlistIndex + 1];
             }
 
-            async function fetchAllSongs(playlistLink, accessToken) {
+            async function fetchSongs(playlistLink, accessToken) {
                 const playlistID = getPlaylistID(playlistLink);
                 let nextUrl = `https://api.spotify.com/v1/playlists/${playlistID}/tracks`;
 

@@ -69,7 +69,7 @@
                     }
 
                     const data = await response.json();
-
+                    console.log(data);
                     data.items.forEach(song => {
                         const songElement = document.createElement('div');
                         songElement.classList.add('song-item');
